@@ -21,7 +21,7 @@ class Ring {
     this.ctx = this.element.getContext('2d');
 
     // Arcs properties:
-    this.ctx.baseThickness = lineWidth;
+    this.baselineWidth = lineWidth;
     this.ctx.lineWidth = lineWidth;
     this.backgroundColor = backgroundColor;
     this.radius = radius;
@@ -74,7 +74,7 @@ class Ring {
             this.arcs[i].begin,
             this.arcs[i].end,
             this.arcs[i].color,
-            this.arcs[i].thickness
+            this.arcs[i].lineWidth
           );
         }
       }
@@ -85,21 +85,21 @@ class Ring {
    * @description Clear drawing area.
    */
   clearCanvas () {
-    this.drawArc(0, 2, this.backgroundColor, this.ctx.baseThickness + 2);
+    this.drawArc(0, 2, this.backgroundColor, this.baselineWidth + 2);
   }
 
   /**
    * @param {number} begin
    * @param {number} end
    * @param {string} color
-   * @param {integer} thickness
+   * @param {integer} lineWidth
    */
-  addArc (begin, end, color, thickness) {
+  addArc (begin, end, color, lineWidth) {
     this.arcs.push({
       begin: begin,
       end, end,
       color: color,
-      thickness: thickness,
+      lineWidth: lineWidth,
       weight: end - begin
     });
   }
@@ -108,9 +108,9 @@ class Ring {
    * @param {number} begin
    * @param {number} end
    * @param {string} color
-   * @param {integer} [thickness]
+   * @param {integer} [lineWidth]
    */
-  drawArc (begin, end, color, thickness) {
+  drawArc (begin, end, color, lineWidth) {
     this.ctx.beginPath();
     this.ctx.arc(
       this.center.x,
@@ -120,10 +120,10 @@ class Ring {
       end * Math.PI
     );
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = thickness ? thickness : this.ctx.baseThickness;
+    this.ctx.lineWidth = lineWidth ? lineWidth : this.baselineWidth;
     this.ctx.stroke();
 
-    if (thickness) this.ctx.lineWidth = this.ctx.baseThickness;
+    if (lineWidth) this.ctx.lineWidth = this.baselineWidth;
   }
 
   /**
