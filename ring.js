@@ -21,7 +21,7 @@ class Ring {
     this.ctx = this.element.getContext('2d');
 
     // Arcs properties:
-    this.ctx.baseLineWidth = lineWidth;
+    this.ctx.baseThickness = lineWidth;
     this.ctx.lineWidth = lineWidth;
     this.backgroundColor = backgroundColor;
     this.radius = radius;
@@ -38,7 +38,6 @@ class Ring {
     this.now = undefined;
     this.then = Date.now();
     this.interval = 1000/fps;
-    this.delta = undefined;
 
     // Animation state:
     this.listener = undefined;
@@ -60,10 +59,10 @@ class Ring {
       );
 
       this.now = Date.now();
-      this.delta = this.now - this.then;
+      let delta = this.now - this.then;
 
-      if (this.delta > this.interval) {
-        this.then = this.now - (this.delta % this.interval);
+      if (delta > this.interval) {
+        this.then = this.now - (delta % this.interval);
 
         if (this.speed > 0) this.speed -= 0.5;
 
@@ -87,7 +86,7 @@ class Ring {
    * @description Clear drawing area.
    */
   clearCanvas () {
-    this.drawArc(0, 2, this.backgroundColor, this.ctx.baseLineWidth + 2);
+    this.drawArc(0, 2, this.backgroundColor, this.ctx.baseThickness + 2);
   }
 
   /**
@@ -122,10 +121,10 @@ class Ring {
       end * Math.PI
     );
     this.ctx.strokeStyle = color;
-    this.ctx.lineWidth = thickness ? thickness : this.ctx.baseLineWidth;
+    this.ctx.lineWidth = thickness ? thickness : this.ctx.baseThickness;
     this.ctx.stroke();
 
-    if (thickness) this.ctx.lineWidth = this.ctx.baseLineWidth;
+    if (thickness) this.ctx.lineWidth = this.ctx.baseThickness;
   }
 
   /**
