@@ -1,7 +1,7 @@
 
 /**
  * @author Przemyslaw Hardyn • przemyslawhardyn.com
- * Landing page animation for my personal website.
+ * Home page animation for my personal website.
  * https://github.com/phardyn/ring
  */
 
