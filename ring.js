@@ -35,7 +35,6 @@ class Ring {
     this.speed = 0;
 
     // Redrawing interval:
-    this.now = undefined;
     this.then = Date.now();
     this.interval = 1000/fps;
 
@@ -58,11 +57,11 @@ class Ring {
         }.bind(this)
       );
 
-      this.now = Date.now();
-      let delta = this.now - this.then;
+      let now = Date.now();
+      let delta = now - this.then;
 
       if (delta > this.interval) {
-        this.then = this.now - (delta % this.interval);
+        this.then = now - (delta % this.interval);
 
         if (this.speed > 0) this.speed -= 0.5;
 
