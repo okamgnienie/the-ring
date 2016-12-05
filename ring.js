@@ -97,7 +97,7 @@ class Ring {
   addArc (begin, end, color, lineWidth) {
     this.arcs.push({
       begin: begin,
-      end, end,
+      end: end,
       color: color,
       lineWidth: lineWidth,
       weight: end - begin
